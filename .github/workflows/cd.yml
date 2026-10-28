@@ -124,9 +124,17 @@ jobs:
         with:
           body: ${{ steps.release_notes.outputs.release_notes }}
           prerelease: ${{ contains(github.ref, '-') }}
+          # fork: immutable releases only accept assets while still a draft,
+          # so upload to a draft and publish it in the next step
+          draft: true
           # fork: linux only; upstream also uploaded ./release/*.zip and ./release/*.msi
           files: |
             ./release/*.tar.gz
+
+      - name: Publish release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release edit "${{ steps.get_version.outputs.version }}" --repo "${{ github.repository }}" --draft=false
 
 #       - name: Bump homebrew-core formula
 #         uses: mislav/bump-homebrew-formula-action@v3
