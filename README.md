@@ -5,6 +5,7 @@ it adds:
 - a nix flake
 - [pr 2997](https://github.com/gitui-org/gitui/pull/2997) from [@stevenpollack](https://github.com/stevenpollack)
 - a patch to allow staging lines in untracked files
+- trims CI to run only linux releases
 
 __AI Disclosure:__ this has been entirely vibecoded, use at your own risk (or better yet, don't).
 

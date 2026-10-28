@@ -1,8 +1,9 @@
 name: Build Nightly Releases
 
 on:
-  schedule:
-    - cron: "0 3 * * *"
+  # fork: no scheduled runs (uploads to upstream's S3 bucket)
+  # schedule:
+  #   - cron: "0 3 * * *"
   workflow_dispatch:
 
 env:
