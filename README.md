@@ -3,6 +3,7 @@ __this is my fork of gitui__
 it adds:
 
 - a nix flake
+- [pr 2997](https://github.com/gitui-org/gitui/pull/2997) from [@stevenpollack](https://github.com/stevenpollack)
 
 ---
 
