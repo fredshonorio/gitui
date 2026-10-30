@@ -240,6 +240,7 @@ mod tests {
 		let cliargs = CliArgs {
 			theme: PathBuf::from("theme.ron"),
 			select_file: None,
+			log_tab: false,
 			repo_path: path,
 			notify_watcher: false,
 			key_bindings_path: None,

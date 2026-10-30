@@ -187,6 +187,8 @@ impl App {
 				}
 			}
 			2
+		} else if cliargs.log_tab {
+			1
 		} else {
 			env.options.borrow().current_tab()
 		};

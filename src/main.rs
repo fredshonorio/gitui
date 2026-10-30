@@ -207,6 +207,7 @@ fn main() -> Result<()> {
 				args = CliArgs {
 					repo_path: p,
 					select_file: None,
+					log_tab: false,
 					theme: args.theme,
 					notify_watcher: args.notify_watcher,
 					key_bindings_path: args.key_bindings_path,

@@ -18,6 +18,7 @@ const LOGGING_FLAG_ID: &str = "logging";
 const THEME_FLAG_ID: &str = "theme";
 const WORKDIR_FLAG_ID: &str = "workdir";
 const FILE_FLAG_ID: &str = "file";
+const LOG_TAB_FLAG_ID: &str = "log_tab";
 const GIT_DIR_FLAG_ID: &str = "directory";
 const WATCHER_FLAG_ID: &str = "watcher";
 const KEY_BINDINGS_FLAG_ID: &str = "key_bindings";
@@ -29,6 +30,7 @@ const DEFAULT_GIT_DIR: &str = ".";
 pub struct CliArgs {
 	pub theme: PathBuf,
 	pub select_file: Option<PathBuf>,
+	pub log_tab: bool,
 	pub repo_path: RepoPath,
 	pub notify_watcher: bool,
 	pub key_bindings_path: Option<PathBuf>,
@@ -61,6 +63,8 @@ pub fn process_cmdline() -> Result<CliArgs> {
 	let select_file = arg_matches
 		.get_one::<String>(FILE_FLAG_ID)
 		.map(PathBuf::from);
+
+	let log_tab = arg_matches.get_flag(LOG_TAB_FLAG_ID);
 
 	let repo_path = if let Some(w) = workdir {
 		RepoPath::Workdir { gitdir, workdir: w }
@@ -95,6 +99,7 @@ pub fn process_cmdline() -> Result<CliArgs> {
 	Ok(CliArgs {
 		theme,
 		select_file,
+		log_tab,
 		repo_path,
 		notify_watcher,
 		key_bindings_path,
@@ -173,6 +178,13 @@ fn app() -> ClapApp {
 				.short('f')
 				.long("file")
 				.num_args(1),
+		)
+		.arg(
+			Arg::new(LOG_TAB_FLAG_ID)
+				.help("Start in the log tab")
+				.long("log-tab")
+				.conflicts_with(FILE_FLAG_ID)
+				.action(clap::ArgAction::SetTrue),
 		)
 		.arg(
 			Arg::new(GIT_DIR_FLAG_ID)
